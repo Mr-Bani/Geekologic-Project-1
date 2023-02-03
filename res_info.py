@@ -7,7 +7,7 @@ d={} # every resturant value
 menu_dict={}
 i=0 # every resturant key in dictionary
 
-with open('restaurant.txt', 'r') as f: #text file containing the URLS
+with open('restaurant_links.txt', 'r') as f: #text file containing the URLS
     for url in f:
         res_url = url.rstrip('\n')
         response = requests.get(res_url)
@@ -28,14 +28,14 @@ with open('restaurant.txt', 'r') as f: #text file containing the URLS
                     menu_data.append(menu_dict[i+1*j+1*z+1])
         d[i]={'id':info['id'],'name':info['name'],'cityId':info['cityId'],'address':info['address'],
            'rate':info['rate'],'fullAddress':info['fullAddress'],'rateCount':info['rateCount'],
-           'deliveryDuration':info['deliveryDuration'],'menu':menu_data}
+           'deliveryDuration':info['deliveryDuration'],'typeId':info['complexTypeId'],'menu':menu_data}
         data.append(d[i])
         i+=1
         
 # save data to csv file
 csv_data = "delino_api_data_csv.csv"
 data_headers = [
-    "id","name","cityId","address","rate","fullAddress","rateCount","deliveryDuration","menu"
+    "id","name","cityId","address","rate","fullAddress","rateCount","deliveryDuration","typeId","menu"
 ]
 
 with open(csv_data , 'w', newline='', encoding="utf-8") as ff :
